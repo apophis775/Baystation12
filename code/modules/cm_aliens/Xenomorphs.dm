@@ -1,4 +1,4 @@
-//Xenomorph Super - Colonial Marines - Apophis775 - Last Edit: 30DEC2014
+//Xenomorph Super - Colonial Marines - Apophis775 - Last Edit: 03JAN2014
 
 /mob/living/carbon/Xenomorph
 	var/caste = ""
@@ -15,3 +15,46 @@
 	wall_smash = 0
 	health = 100
 	maxHealth = 100
+	var/amount_grown = 0
+	var/max_grown = 10
+	var/time_of_birth
+	var/language
+
+
+/mob/living/carbon/Xenomorph/New()
+
+	time_of_birth = world.time
+
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+
+	var/datum/reagents/R = new/datum/reagents(100)
+	reagents = R
+	R.my_atom = src
+
+	name = "[initial(name)] ([rand(1, 1000)])"
+	real_name = name
+	regenerate_icons()
+
+	if(language)
+		add_language(language)
+
+	gender = NEUTER
+
+	..()
+
+/mob/living/carbon/alien/u_equip(obj/item/W as obj)
+	return
+
+/mob/living/carbon/alien/Stat()
+	..()
+	stat(null, "Progress: [amount_grown]/[max_grown]")
+
+/mob/living/carbon/alien/restrained()
+	return 0
+
+/mob/living/carbon/alien/show_inv(mob/user as mob)
+	return
+
+/mob/living/carbon/alien/can_use_vents()
+	return
