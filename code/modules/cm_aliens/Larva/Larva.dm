@@ -1,4 +1,4 @@
-//Xenomorph - Larva - Colonial Marines - Apophis775 - Last Edit: 03JAN2014
+//Xenomorph - Larva - Colonial Marines - Apophis775 - Last Edit: 03JAN2015
 
 /mob/living/carbon/Xenomorph/larva
 	name = "Alien Larva"
@@ -19,7 +19,7 @@
 	add_language("Xenomorph") //Bonus language.
 	internal_organs += new /datum/organ/internal/xenos/hivenode(src)
 
-/mob/living/carbon/alien/Xenomorph/handle_environment(var/datum/gas_mixture/environment)
+/mob/living/carbon/Xenomorph/handle_environment(var/datum/gas_mixture/environment)
 
 	if(!environment) return
 

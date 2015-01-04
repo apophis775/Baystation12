@@ -1,5 +1,5 @@
-//Xenomorph Larva Progression - Colonial Marines - Apophis775 - Last Edit: 03JAN2014
-/mob/living/carbon/Xenomorph/larva/update_progression()
+//Xenomorph Larva Progression - Colonial Marines - Apophis775 - Last Edit: 03JAN2016
+/mob/living/carbon/Xenomorph/update_progression()
 	if(amount_grown < max_grown)
 		amount_grown++
 	return
@@ -14,5 +14,3 @@
 	caste = alert(src, "Please choose which alien caste you shall belong to.",,"Hunter","Sentinel","Drone")
 	return caste ? "Xenomorph [caste]" : null
 
-/mob/living/carbon/alien/Xenomorph/show_evolution_blurb()
-	return

@@ -1,8 +1,8 @@
-//Xenomorph Evolution - Colonial Marines - Apophis775 - Last Edit: 03JAN2014
+//Xenomorph Evolution - Colonial Marines - Apophis775 - Last Edit: 03JAN2015
 
 
 //ALL THIS SHIT, NEEDS TO BE REDONE.
-/mob/living/carbon/Xenomorph/verb/evolve1()
+/mob/living/carbon/Xenomorph/larva/verb/evolve1()
 
 	set name = "Evolve (Larva)"
 	set desc = "Evolve into your adult form."
@@ -11,9 +11,7 @@
 	if(stat != CONSCIOUS)
 		return
 
-	if(!adult_form)
-		verbs -= /mob/living/carbon/alien/verb/evolve
-		return
+
 
 	if(handcuffed || legcuffed)
 		src << "\red You cannot evolve when you are cuffed."
@@ -23,6 +21,7 @@
 		src << "\red You are not fully grown."
 		return
 
+
 	// confirm_evolution() handles choices and other specific requirements.
 	var/new_species = confirm_evolution()
 	if(!new_species || !adult_form )
@@ -30,7 +29,6 @@
 
 	var/mob/living/carbon/human/adult = new adult_form(get_turf(src))
 	adult.set_species(new_species)
-	show_evolution_blurb()
 
 	if(mind)
 		mind.transfer_to(adult)
@@ -44,11 +42,9 @@
 		adult.add_language(L.name)
 	del(src)
 
-/mob/living/carbon/alien/proc/update_progression()
+/mob/living/carbon/Xenomorph/proc/update_progression()
 	return
 
-/mob/living/carbon/alien/proc/confirm_evolution()
+/mob/living/carbon/Xenomorph/larva/proc/confirm_evolution()
 	return
 
-/mob/living/carbon/alien/proc/show_evolution_blurb()
-	return
