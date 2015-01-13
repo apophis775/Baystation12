@@ -1,11 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\cm_aliens\Xenomorphs.dm;code\modules\cm_aliens\Evolution.dm;code\modules\cm_aliens\Larva\Larva.dm;code\modules\cm_aliens\Larva\Progression.dm;code\modules\mob\living\carbon\alien\alien.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\modules code\modules\cm_aliens code\modules\cm_aliens\Larva code\modules\cm_marines code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\alien 
-FILE: code\modules\cm_aliens\Xenomorphs.dm
-LAST_COMPILE_TIME: 1421116821
+DIR: code\game code\game\gamemodes code\game\gamemodes\xeno code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\modules\cm_aliens code\modules\cm_aliens\Larva code\modules\cm_marines 
+LAST_COMPILE_TIME: 1421121730
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
