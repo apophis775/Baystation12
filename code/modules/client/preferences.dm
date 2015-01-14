@@ -4,9 +4,21 @@ var/list/preferences_datums = list()
 
 var/global/list/special_roles = list( //keep synced with the defines BE_* in setup.dm --rastaf
 //some autodetection here.
+	"traitor" = IS_MODE_COMPILED("traitor"),             // 0
+	"operative" = IS_MODE_COMPILED("nuclear"),           // 1
+	"changeling" = IS_MODE_COMPILED("changeling"),       // 2
+	"wizard" = IS_MODE_COMPILED("wizard"),               // 3
+	"malf AI" = IS_MODE_COMPILED("malfunction"),         // 4
+	"revolutionary" = IS_MODE_COMPILED("revolution"),    // 5
 	"alien candidate" = 1, //always show                 // 6
-	"survivor" = 1,								 		 // 10
 	"pAI candidate" = 1, // -- TLE                       // 7
+	"cultist" = IS_MODE_COMPILED("cult"),                // 8
+	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
+	"ninja" = "true",                                    // 10
+	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
+	"diona" = 1,                                         // 12
+	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
+	"survivor" = 1,										 // 14
 )
 
 var/const/MAX_SAVE_SLOTS = 10
