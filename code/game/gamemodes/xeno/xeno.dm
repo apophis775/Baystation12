@@ -8,34 +8,13 @@
 	name = "colonial marines"
 	config_tag = "colonialmarines"
 	required_players = 1
-	// required_enemies = 2
-	var/isnotified = 0
-	var/isnotified2 = 0
-	var/isshuttlerecalled = 1
-	var/isshuttlecalled = 0
 	var/checkwin_counter = 0
 	var/finished = 0
 	var/humansurvivors = 0
 	var/aliensurvivors = 0
-	var/numaliens = 1
-	var/numsurvivors = 1
 	
-	var/const/waittime_l = 1000 //lower bound on time before intercept arrives (in tenths of seconds)
-	var/const/waittime_h = 2000 //upper bound on time before intercept arrives (in tenths of seconds)
 
-
-///////////////////////////
-//Announces the game type//
-///////////////////////////
-/datum/game_mode/colonialmarines/announce()
-	world << "<B>The current game mode is - Colonial Marines!</B>"
-//	world << "<B>Marines, clear out the Alien infestation. Aliens, prevent the Marines from clearing out your infestation.</B>"
-
-
-/////////////////////
-//Pre-pre-startup //
-////////////////////
-
+/* Pre-pre-startup */
 /datum/game_mode/colonialmarines/can_start()
 
 	if(!..())
@@ -43,83 +22,81 @@
 	
 	var/list/datum/mind/possible_survivors = get_players_for_role(BE_SURVIVOR)
 	var/list/datum/mind/possible_aliens = get_players_for_role(BE_ALIEN)
-
-	if(possible_survivors.len < 1)
-		world << "<B>No survivors available</B>"
-		return 0
-
-		if(possible_aliens.len < 1)
-		world << "<B>No aliens available</B>"
-		return 0
-
-	if(num_players() < 10)
-		numsurvivors = 0
-		if(prob(10))
-			numsurvivors = 1
-	if(num_players() > 15)
-		numsurvivors = 2
-	if(num_players() > 30)
-		if(prob(90))
-			numsurvivors = 3
-	if(num_players() >50)
-		if(numsurvivors< 3)
-			numsurvivors = 3
-		else if (prob(90))
-			numsurvivors = 4
-	if(num_players() > 40)
-		if(prob(80))
-			numsurvivors = 4
-	if(num_players() > 10)
-		numaliens = 2
-	if(num_players() > 20)
-		numaliens = 3
-	if(num_players() > 30)
-		numaliens = 4
-	if(num_players() >40)
-		numaliens = 5
-	if(num_players() > 50)
-		numaliens = 6
+	var/numaliens = 0
+	var/numsurvivors = 0
+	var/n_players = num_players()
 	
-	for(var/i = 0, i < numsurvivors, i++)
-		var/datum/mind/surv = pick(possible_survivors)
-		survivors += surv
-		modePlayer += surv
-		surv.assigned_role = "Survivor" //So they aren't chosen for other jobs.
-		surv.special_role = "Survivor"
-		surv.original = surv.current
+/* Un-comment this to debug stuff
+	if(possible_survivors.len < 1)
+		world << "<B>\red No survivors available</B>"
+		return 0
 	if(surv_spawn.len == 0)
-		//alien.current << "<B>\red A starting location for you could not be found, please report this bug!</B>"
-		return 0
-
-		for(var/i = 0, i < numaliens, i++)
-		var/datum/mind/alien = pick(possible_aliens)
-		aliens += alien
-		modePlayer += alien
-		alien.assigned_role = "MODE" //So they aren't chosen for other jobs.
-		alien.special_role = "Drone"
-		alien.original = alien.current
+		world << "<B>\red A starting location for survivors could not be found.</B>"
+		return 0 
 	if(xeno_spawn.len == 0)
-		//alien.current << "<B>\red A starting location for you could not be found, please report this bug!</B>"
+		world << "<B>\red A starting location for aliens could not be found.</B>"
 		return 0
+*/
+
+	//Check if anyone wants to be an alien. If not, restart the lobby countdown
+	if(possible_aliens.len < 1)
+		world << "<h2 style=\"color:red\">Not enough players have chosen 'Be alien' in their character setup. Aborting.</h2>"
+		return 0
+ 
+ 	//Alien number scales to player number
+	numaliens = Clamp((n_players/5), 2, 6) //(n, minimum, maximum)
+	
+	if(possible_aliens.len < numaliens)
+		numaliens = possible_aliens.len
+
+	while(numaliens > 0)
+		var/datum/mind/new_alien = pick(possible_aliens)
+		aliens += new_alien
+		possible_aliens -= new_alien //So it doesn't pick the same guy each time
+		numaliens--
+
+	//Survivor number scales to player number
+	numsurvivors = Clamp((n_players/5), 0, 3) //(n, minimum, maximum)
+	
+	if(possible_survivors.len < numsurvivors)
+		numsurvivors = possible_survivors.len
+
+	while(numsurvivors > 0)
+		var/datum/mind/new_surv = pick(possible_survivors)
+		survivors += new_surv
+		possible_survivors -= new_surv //So it doesn't pick the same guy each time
+		numsurvivors--
+
+	//Assign alien and survivor roles
+	for(var/datum/mind/alien_mind in aliens)
+		alien_mind.assigned_role = "MODE" 	//So they aren't chosen for other jobs
+		alien_mind.special_role = "Drone" 	//So they actually have a special role
+
+	for(var/datum/mind/surv_mind in survivors)
+		surv_mind.assigned_role = "Survivor"
+		surv_mind.special_role = "Survivor"
+
 	return 1
 
-//////////////
-//Pre-setup//
-/////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 
+/* Pre-setup */
 /datum/game_mode/colonialmarines/pre_setup()
-	for(var/datum/mind/alien in aliens)
-		alien.current.loc = pick(xeno_spawn)
-	for(var/datum/mind/alien in survivors)
-		alien.current.loc = pick(surv_spawn)
+	//Spawn aliens
+	for(var/datum/mind/alien_mind in aliens)
+		alien_mind.current.loc = pick(xeno_spawn)
+	//Spawn survivors
+	for(var/datum/mind/surv_mind in survivors)
+		surv_mind.current.loc = pick(surv_spawn)
 	spawn (50)
-		command_announcement.Announce("Distress signal recieved from the NSS Nostromo. A response team from NMV Sulaco will be dispatched shortly to investigate.", "NMV Sulaco")	
+	command_announcement.Announce("Distress signal received from the NSS Nostromo. A response team from NMV Sulaco will be dispatched shortly to investigate.", "NMV Sulaco")	
 	return 1
 
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////
-//Set-up stuff after the initial setup//
-////////////////////////////////////////
+/* Post-setup */
 /datum/game_mode/colonialmarines/post_setup()
 	defer_powernet_rebuild = 2
 	for(var/datum/mind/alien in aliens)
@@ -131,17 +108,30 @@
 			marines += marine.mind
 	tell_story()
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Proc to handle transforming the player into an alien by calling the "Alienize2" proc in /mob/living/carbon/human//
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Start the Alien players
 /datum/game_mode/proc/transform_player(mob/living/carbon/human/H)
-	H.Alienize()
+
+	//Transform alien players into only Drones by calling the "Alienize2" proc in modules/mob/transform_procs.dm
+	H.Alienize2()
+	
+	//Give them some information
+	H.client << "<h2>You are an alien!</h2>"
+	H.client << "<h2>Use Say \":a <message>\" to communicate with other aliens.</h2>"
 	return 1
 
+//Start the Survivor players
 /datum/game_mode/proc/transform_player2(mob/living/carbon/human/H)
+
+	//Damage them for realism purposes
 	H.take_organ_damage(rand(1,25), rand(1,25))
+	
+	//Equip them
+	H.equip_to_slot_or_del(new /obj/item/clothing/under/color/grey(H), slot_w_uniform)
+	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
+
+	//Give them some information
 	H.client << "<h2>You are a survivor!</h2>"
-	H.client << "\blue You were a crew member on the Nostromo. Your crew was wiped out by an alien infestation. You should try to locate and help other survivors (If there are any other than you.)"
+	H.client << "\blue You were a crew member on the Nostromo. Your crew was wiped out by an alien infestation. You should try to locate and help other survivors (if there are any other than you.)"
 	return 1
 
 var/list/survivorstory = list("You watched your friend {name}'s chest burst and an alien larva come out. You tried to capture it but it escaped through the vents. ", "{name} was attacked by a facehugging alien, which impregnated them with an alien lifeform. {name}'s chest burst and a larva emerged and escaped through the vents", "You watched {name} get the alien lifeform's acid on them, melting away their flesh. You can still hear the screams... ", "The Head of Security, {name}, made an announcement that the aliens killed the Captain and Head of Personnel, and that all crew should hide and wait for rescue." )
@@ -178,6 +168,7 @@ var/list/toldstory = list()
 				H << replacetext(story, "{surv}", "[OH.name]")
 
 			toldstory.Add(H.name)
+
 /datum/game_mode/colonialmarines/process()
 	//Reset the survivor count to zero per process call.
 	humansurvivors = 0
@@ -193,21 +184,12 @@ var/list/toldstory = list()
 			if(A.client && A.stat != DEAD) // If they're connected/unghosted and alive and not debrained
 				aliensurvivors += 1
 
-/* This is a new thing I plan on implementing later. Commented out right now since all it does it add extra processing cost :(
-	for(var/mob/L in mob_list)
-		if(L.mind)
-			if(L.mind.assigned_role == "Alien")
-				aliens += L.mind
-	for(var/mob/living/carbon/human/K in mob_list)
-		if(K.stat != 2 && K.mind)
-			marines += K.mind*/
-
 	//Debug messages, remove when not needed.
 	//log_debug("there are [aliensurvivors] aliens left.")
 	//log_debug("there are [humansurvivors] humans left.")
 
 	checkwin_counter++
-	if(checkwin_counter >= 3)
+	if(checkwin_counter >= 5)
 		if(!finished)
 			ticker.mode.check_win()
 		checkwin_counter = 0
@@ -310,11 +292,11 @@ datum/game_mode/colonialmarines/proc/check_alien_victory()
 		feedback_set_details("round_end_result","alien major victory - marine incursion fails")
 		world << "\red <FONT size = 3><B>The aliens have successfully wiped out the marines and will live to spread the infestation!</B></FONT>"
 	else if(finished == 2)
-		feedback_set_details("round_end_result","marine major victory - xenomorph infestation erradicated")
+		feedback_set_details("round_end_result","marine major victory - xenomorph infestation eradicated")
 		world << "\red <FONT size = 3><B>The marines managed to wipe out the aliens and stop the infestation!</B></FONT>"
 	else if(finished == 3)
 		feedback_set_details("round_end_result","marine minor victory - infestation stopped at a great cost")
-		world << "\red <FONT size = 3><B>Both the marines and the aliens have been terminated. At least the infestation has been erradicated!</B></FONT>"
+		world << "\red <FONT size = 3><B>Both the marines and the aliens have been terminated. At least the infestation has been eradicated!</B></FONT>"
 	else if(finished == 4)
 		feedback_set_details("round_end_result","alien minor victory - infestation survives")
 		world << "\red <FONT size = 3><B>The station has been evacuated... but the infestation remains!</B></FONT>"
@@ -328,10 +310,10 @@ datum/game_mode/colonialmarines/proc/check_alien_victory()
 /datum/game_mode/proc/auto_declare_completion_colonialmarines()
 	if( aliens.len || (ticker && istype(ticker.mode,/datum/game_mode/colonialmarines)) )
 		var/text = "<FONT size = 2><B>The aliens were:</B></FONT>"
-		for(var/mob/living/L in mob_list)
-			if(L.mind && L.mind.assigned_role)
-				if(L.mind.assigned_role == "Alien")
-					var/mob/M = L.mind.current
+		for(var/mob/living/A in mob_list)
+			if(A.mind && A.mind.assigned_role)
+				if(A.mind.assigned_role == "Alien")
+					var/mob/M = A.mind.current
 					if(M)
 						text += "<br>[M.key] was [M.name] ("
 						if(M.stat == DEAD)
