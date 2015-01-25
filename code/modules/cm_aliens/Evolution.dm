@@ -51,7 +51,7 @@
 	if(storedplasma == 500)
 		var/no_queen = 1
 		for(var/mob/living/carbon/Xenomorph/Queen/Q in living_mob_list)
-			if(!Q.key && Q.brain_op_stage != 4)
+			if(!Q.key && Q.stat != DEAD)
 				continue
 			no_queen = 0
 		if(no_queen)

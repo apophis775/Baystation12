@@ -20,18 +20,14 @@
 	storedplasma = 300
 	maxplasma = 700
 
-/*//OLD QUEEN CODE - Reference Only
 /mob/living/carbon/Xenomorph/Queen/New()
-	var/datum/reagents/R = new/datum/reagents(100)
-	reagents = R
-	R.my_atom = src
-	//hive_controller.active_queen = src
-	for(var/mob/living/carbon/alien/humanoid/queen/Q in living_mob_list)
+	..()
+	for(var/mob/living/carbon/Xenomorph/Queen/Q in living_mob_list)
 		if(Q == src)		continue
 		if(Q.stat == DEAD)	continue
 		if(Q.client)
 			name = "Alien Queen"
-			break*/
+			break
 
 /* Old queen code - REFERENCE ONLY
 
