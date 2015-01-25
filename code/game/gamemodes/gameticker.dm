@@ -295,7 +295,7 @@ var/global/datum/controller/gameticker/ticker
 		var/captainless=1
 		for(var/mob/living/carbon/human/player in player_list)
 			if(player && player.mind && player.mind.assigned_role)
-				if(player.mind.assigned_role == "Captain")
+				if(player.mind.assigned_role == "Commander")
 					captainless=0
 				if(player.mind.assigned_role != "MODE")
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
@@ -304,7 +304,7 @@ var/global/datum/controller/gameticker/ticker
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
-					M << "Captainship not forced on anyone."
+					M << "Marine commander position not forced on anyone."
 
 
 	proc/process()

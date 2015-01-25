@@ -197,13 +197,39 @@
 	for(var/t in organs)
 		del(t)
 
-	var/alien_caste = pick("Hunter","Sentinel","Drone")
+	var/alien_caste = pick("Runner","Sentinel","Drone")
 	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
 
 	new_xeno.a_intent = "hurt"
 	new_xeno.key = key
 
 	new_xeno << "<B>You are now an alien.</B>"
+	spawn(0)//To prevent the proc from returning null.
+		del(src)
+	return
+	
+//human -> alien drone
+/mob/living/carbon/human/proc/Alienize2()
+	if (monkeyizing)
+		return
+	for(var/obj/item/W in src)
+		drop_from_inventory(W)
+	regenerate_icons()
+	monkeyizing = 1
+	canmove = 0
+	icon = null
+	invisibility = 101
+	for(var/t in organs)
+		del(t)
+
+	var/alien_caste = "Drone"
+	var/mob/living/carbon/alien/new_xeno = create_new_xenomorph(alien_caste,loc)
+
+	new_xeno.a_intent = "hurt"
+	new_xeno.key = key
+
+	new_xeno << "<b>You are an alien!</b>"
+	new_xeno << "<b>Use Say \":a message\" to communicate with other aliens.</b>"
 	spawn(0)//To prevent the proc from returning null.
 		del(src)
 	return
