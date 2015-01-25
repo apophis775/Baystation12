@@ -1,8 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\cm_aliens\Xenomorph.dm;code\modules\cm_aliens\Evolution.dm;code\modules\cm_aliens\Castes\Larva.dm;code\modules\cm_aliens\Castes\Drone.dm;code\modules\cm_aliens\Life.dm;code\modules\cm_aliens\Castes\Queen.dm
 LAST_COMPILE_VERSION: 506.1249
 DIR: code code\__HELPERS code\datums code\game code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\modules code\modules\cm_aliens code\modules\cm_aliens\Castes code\modules\cm_marines code\modules\mob 
+FILE: code\modules\cm_aliens\Castes\Queen.dm
 LAST_COMPILE_TIME: 1422145010
 AUTO_FILE_DIR: OFF
 */
