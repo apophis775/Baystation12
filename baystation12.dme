@@ -812,6 +812,7 @@
 #include "code\modules\clothing\under\jobs\security.dm"
 #include "code\modules\cm_aliens\Evolution.dm"
 #include "code\modules\cm_aliens\Life.dm"
+#include "code\modules\cm_aliens\XenoHud.dm"
 #include "code\modules\cm_aliens\Xenomorph.dm"
 #include "code\modules\cm_aliens\Castes\Drone.dm"
 #include "code\modules\cm_aliens\Castes\Larva.dm"
