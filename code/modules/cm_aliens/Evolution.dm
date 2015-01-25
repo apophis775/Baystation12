@@ -1,50 +1,66 @@
-//Xenomorph Evolution - Colonial Marines - Apophis775 - Last Edit: 03JAN2015
+//Xenomorph Evolution Code - Colonial Marines - Apophis775 - Last Edit: 24JAN2015
 
 
-//ALL THIS SHIT, NEEDS TO BE REDONE.
-/mob/living/carbon/Xenomorph/larva/verb/evolve1()
-
-	set name = "Evolve (Larva)"
-	set desc = "Evolve into your adult form."
+//Larva Evolve
+/mob/living/carbon/Xenomorph/Larva/verb/Evolve()
+	set name = "Evolve"
+	set desc = "Evolve into a beautiful alien"
 	set category = "Abilities"
 
-	if(stat != CONSCIOUS)
+	if(stat !=CONSCIOUS)
+		src << "\red You need to be conscious to evolve."
 		return
 
-
-
 	if(handcuffed || legcuffed)
-		src << "\red You cannot evolve when you are cuffed."
+		src << "\red The restraints are too restricting to allow you to evolve"
 		return
 
 	if(amount_grown < max_grown)
-		src << "\red You are not fully grown."
+		src << "\red You are not fully Grown"
+		return
+
+	var/newcaste = larva_evolution()
+
+	switch(newcaste)
+		if("Runner")
+			//	new_xeno = new /mob/living/carbon/alien/humanoid/runner(loc)
+		if("Sentinel")
+			//	new_xeno = new /mob/living/carbon/alien/humanoid/sentinel(loc)
+		if("Drone")
+			new_xeno = new /mob/living/carbon/Xenomorph/Drone(loc)
+	if(mind)
+		mind.transfer_to(new_xeno)
+	del(src)
+	return
+
+//Drone Evolve to Queen
+/mob/living/carbon/Xenomorph/Drone/verb/Evolve()
+	set name = "Evolve (500)"
+	set desc = "Evolve into a beautiful Queen, requires 500 Plasma."
+	set category = "Abilities"
+
+	if(stat !=CONSCIOUS)
+		src << "\red You need to be conscious to evolve."
+		return
+
+	if(handcuffed || legcuffed)
+		src << "\red The restraints are too restricting to allow you to evolve."
 		return
 
 
-	// confirm_evolution() handles choices and other specific requirements.
-	var/new_species = confirm_evolution()
-	if(!new_species || !adult_form )
-		return
+	if(storedplasma == 500)
+		var/no_queen = 1
+		for(var/mob/living/carbon/Xenomorph/Queen/Q in living_mob_list)
+			if(!Q.key && Q.stat != DEAD)
+				continue
+			no_queen = 0
+		if(no_queen)
+			src << "\red There is already a queen."
+			return
+		new_xeno = new /mob/living/carbon/Xenomorph/Queen(loc)
 
-	var/mob/living/carbon/human/adult = new adult_form(get_turf(src))
-	adult.set_species(new_species)
 
 	if(mind)
-		mind.transfer_to(adult)
-	else
-		adult.key = src.key
-
-	for (var/obj/item/W in src.contents)
-		src.drop_from_inventory(W)
-
-	for(var/datum/language/L in languages)
-		adult.add_language(L.name)
+		mind.transfer_to(new_xeno)
 	del(src)
-
-/mob/living/carbon/Xenomorph/proc/update_progression()
 	return
-
-/mob/living/carbon/Xenomorph/larva/proc/confirm_evolution()
-	return
-

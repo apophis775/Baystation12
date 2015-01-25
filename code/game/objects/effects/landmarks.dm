@@ -77,6 +77,10 @@
 			xeno_spawn += loc
 			del(src)
 
+		if("surv_spawn")
+			surv_spawn += loc
+			del(src)
+
 		if("ninjastart")
 			ninjastart += loc
 			del(src)
