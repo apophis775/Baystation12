@@ -18,11 +18,7 @@
 	..()
 	add_language("Xenomorph") //Bonus language.
 	internal_organs += new /datum/organ/internal/xenos/hivenode(src)
-
-
-//Larva Environment Handling
-
-
+	larva_hud()
 
 
 //Larva Progression

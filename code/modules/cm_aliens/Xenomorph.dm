@@ -1,4 +1,5 @@
 //Xenomorph Super - Colonial Marines - Apophis775 - Last Edit: 24JAN2015
+//This could, could REALLY use a cleanup...
 
 /mob/living/carbon/Xenomorph
 	var/caste = ""
@@ -34,6 +35,10 @@
 	reagents = R
 	R.my_atom = src
 
+	src.frozen = 1 //Freeze the alien in place a moment, while it evolves
+	spawn (25)
+		src.frozen = 0
+
 	name = "[initial(name)] ([rand(1, 1000)])"
 	real_name = name
 	regenerate_icons()
@@ -44,6 +49,7 @@
 	gender = NEUTER
 
 	..()
+
 
 /mob/living/carbon/Xenomorph/u_equip(obj/item/W as obj)
 	return

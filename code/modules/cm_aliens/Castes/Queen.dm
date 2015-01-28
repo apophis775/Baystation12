@@ -7,8 +7,8 @@
 	icon = 'icons/xeno/Colonial_Queen.dmi'
 	icon_state = "Queen Walking"
 	pass_flags = PASSTABLE
-	melee_damage_lower = 12
-	melee_damage_upper = 16
+	melee_damage_lower = 30
+	melee_damage_upper = 35
 	attacktext = "Bites"
 	attack_sound = null
 	friendly = "Nuzzles"
@@ -32,23 +32,13 @@
 /* Old queen code - REFERENCE ONLY
 
 /mob/living/carbon/alien/humanoid/queen
-	name = "alien queen"
-	caste = "Accurate Queen"
-	maxHealth = 700
-	health = 700
-	storedPlasma = 300
-	max_plasma = 700
-	icon_state = "Accurate Queen Running"
 	status_flags = CANPARALYSE
 	heal_rate = 4
 	plasma_rate = 20
 	var/usedscreech = 0
-	damagemin = 30
-	damagemax = 35
 	tacklemin = 4
 	tacklemax = 8
 	tackle_chance = 90 //Should not be above 100%
-	icon = 'icons/Xeno/2x2_Xenos.dmi'
 
 /datum/hive_controller
 	var/mob/living/carbon/alien/humanoid/queen/active_queen
