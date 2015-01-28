@@ -35,9 +35,9 @@
 	reagents = R
 	R.my_atom = src
 
-	src.frozen = 1 //Freeze the alien in place a moment, while it evolves
+//	src.frozen = 1 //Freeze the alien in place a moment, while it evolves
 	spawn (25)
-		src.frozen = 0
+//		src.frozen = 0
 
 	name = "[initial(name)] ([rand(1, 1000)])"
 	real_name = name
