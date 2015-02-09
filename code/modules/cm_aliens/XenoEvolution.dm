@@ -23,7 +23,7 @@
 
 	switch(newcaste)
 		if("Runner")
-			//	new_xeno = new /mob/living/carbon/alien/humanoid/runner(loc)
+			new_xeno = new /mob/living/carbon/Xenomorph/Runner(loc)
 		if("Sentinel")
 			//	new_xeno = new /mob/living/carbon/alien/humanoid/sentinel(loc)
 		if("Drone")

@@ -22,6 +22,9 @@
 	return 1
 
 
+/mob/living/carbon/Xenomorph/proc/checkPlasma()
+	return storedplasma
+
 
 
 //FUNCTIONS

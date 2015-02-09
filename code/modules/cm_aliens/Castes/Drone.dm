@@ -27,10 +27,10 @@ mob/living/carbon/Xenomorph/Drone/New()
 
 
 // either freeze is currently broken and needs to be investigated...
-	/*
+	/
 	src.frozen = 1
 	spawn (25)
-		src.frozen = 0*/
+		src.frozen = 0
 //	verbs.Add(/mob/living/carbon/Xenomorph/proc/resin,/mob/living/carbon/Xenomorph/proc/weak_acid) //This will be enabled later
 	growJelly()
 

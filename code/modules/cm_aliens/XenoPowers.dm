@@ -1,7 +1,23 @@
 //Xenomorph Super - Colonial Marines - Apophis775 - Last Edit: 8FEB2015
 
 
-//Xeno Verbs
+//Xeno Powerchecker Parts of it stolen from old Bay...
+
+
+/mob/living/carbon/Xenomorph/proc/powerc(X, Y) //Y Y is for weed planting
+
+	if(stat)
+		src << "\red Can't do this while unconcious."
+		return 0
+	else if(X && checkPlasma() <X)
+		src << "\red Not enough plasma,try again later"
+		return 0
+	else if(Y && (!isturf(src.loc) || istype(src.loc, /turf/space)))
+		src << "\green Bad place for a garden!"
+	else
+		return 1
+
+//Xeno Powers
 
 
 //Drone Verbs
@@ -12,16 +28,13 @@
 
 //Runner Verbs
 
-/mob/living/carbon/alien/humanoid/runner/verb/Pounce()
+/mob/living/carbon/Xenomorph/Runner/verb/Pounce()
 	set name = "Pounce (25)"
 	set desc = "Pounce onto your prey."
 	set category = "Alien"
-	src << "\red Currently Disable in this version."
-
-/*  Disabled at the moment, it requires src.frozen, which doesn't appear functional with aliens ATM.  Gonna have to look into this...
 
 
-	if(usedpounce >= 1)
+	if(usedPounce >= 1)
 		src << "\red We must wait before pouncing again.."
 		return
 
@@ -46,7 +59,7 @@
 				src.m_intent = "run"
 				src.hud_used.move_intent.icon_state = "running"
 			src.loc = targloc
-			usedpounce = 5
+			usedPounce = 5
 			adjustToxLoss(-50)
 			if(target.r_hand && istype(target.r_hand, /obj/item/weapon/shield/riot) || target.l_hand && istype(target.l_hand, /obj/item/weapon/shield/riot))
 				if (prob(35))	// If the human has riot shield in his hand
@@ -68,4 +81,4 @@
 		else
 			src << "\red We sense no prey.."
 
-	return*/
+	return

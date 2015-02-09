@@ -17,6 +17,7 @@
 	maxHealth = 80
 	storedplasma = 50
 	maxplasma = 100
+	var/usedPounce = 0
 
 //New Runner Code 08FEB2015 Apophis775
 
@@ -24,7 +25,7 @@ mob/living/carbon/Xenomorph/Runner/New()
 	..()
 	jelly = 0
 	jellyMax = 750
-	var/usedPounce = 0  //ATM defined but not used, deal with it for now.  - Apophis
+
 
 
 
