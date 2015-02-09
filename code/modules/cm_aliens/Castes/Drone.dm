@@ -18,34 +18,33 @@
 	storedplasma = 350
 	maxplasma = 750
 
+//Create a new drone 06FEB2015
+
+mob/living/carbon/Xenomorph/Drone/New()
+	..()
+	jelly = 1
+	jellyMax = 1200
+	/*spawn (25)
+		src.frozen = 0*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* OLD CM ALIEN CODE - FOR REFERENCE ONLY
 
-	heal_rate = 8
-	plasma_rate = 13
-	tacklemin = 2
-	tacklemax = 4 //old max 5
-	tackle_chance = 40 //Should not be above 100% old chance 50
-	var/hasJelly = 0
-	var/jellyProgress = 0
-	var/jellyProgressMax = 1200
-	psychiccost = 30
-	Stat()
-		..()
-		stat(null, "Jelly Progress: [jellyProgress]/[jellyProgressMax]")
-	proc/growJelly()
-		spawn while(1)
-			if(hasJelly)
-				if(jellyProgress < jellyProgressMax)
-					jellyProgress = min(jellyProgress + 1, jellyProgressMax)
-			sleep(10)
-	proc/canEvolve()
-		if(!hasJelly)
-			return 0
-		if(jellyProgress < jellyProgressMax)
-			return 0
-		return 1
+
+
 
 /mob/living/carbon/alien/humanoid/drone/New()
 	var/datum/reagents/R = new/datum/reagents(100)

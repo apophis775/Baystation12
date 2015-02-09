@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\cm_aliens\Xenomorph.dm;code\modules\cm_aliens\Evolution.dm;code\modules\cm_aliens\Castes\Larva.dm;code\modules\cm_aliens\Castes\Drone.dm;code\modules\cm_aliens\Life.dm;code\modules\cm_aliens\Castes\Queen.dm;code\game\verbs\who.dm;code\modules\assembly\igniter.dm
+WINDOW: code\modules\cm_aliens\Xenomorph.dm;code\modules\cm_aliens\Evolution.dm;code\modules\cm_aliens\Castes\Larva.dm;code\modules\cm_aliens\Castes\Drone.dm;code\modules\cm_aliens\Life.dm;code\modules\cm_aliens\Castes\Queen.dm;code\modules\cm_marines\Marine_Weapons_V2.dm;code\modules\cm_marines\Marine_Vending.dm;baystation12.dme;code\modules\cm_aliens\XenoProcs.dm;code\modules\cm_marines\Marine_medical.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\_onclick code\_onclick\hud code\datums code\game code\game\gamemodes code\game\gamemodes\xeno code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\game\verbs code\modules code\modules\assembly code\modules\cm_aliens code\modules\cm_aliens\Castes 
-FILE: code\modules\assembly\igniter.dm
-LAST_COMPILE_TIME: 1422819100
+DIR: code code\__HELPERS code\_onclick code\_onclick\hud code\datums code\game code\game\gamemodes code\game\gamemodes\xeno code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\game\verbs code\modules code\modules\assembly code\modules\cm_aliens code\modules\cm_aliens\Castes code\modules\cm_marines 
+FILE: code\modules\cm_marines\Marine_Weapons_V2.dm
+LAST_COMPILE_TIME: 1423458011
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
