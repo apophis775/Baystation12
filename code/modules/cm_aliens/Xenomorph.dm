@@ -1,5 +1,4 @@
 //Xenomorph Super - Colonial Marines - Apophis775 - Last Edit: 8FEB2015
-//This could, could REALLY use a cleanup...
 
 /mob/living/carbon/Xenomorph
 	var/caste = ""
@@ -95,3 +94,35 @@
 		adjustFireLoss(-1)
 		adjustToxLoss(-1)
 		adjustOxyLoss(-1)
+
+
+
+
+//Xenomorph Hud Health Adjuster Apophis 08FEB2015
+
+/*  Enable later, and it may need to be adjusted once the hud is operational
+/mob/living/carbon/Xenomorph
+
+	handle_regular_hud_updates()
+
+		..()
+		var/HP = (health/maxHealth)*100
+
+		if (healths)
+			if (stat != 2)
+				switch(HP)
+					if(80 to INFINITY)
+						healths.icon_state = "health0"
+					if(60 to 80)
+						healths.icon_state = "health1"
+					if(40 to 60)
+						healths.icon_state = "health2"
+					if(20 to 40)
+						healths.icon_state = "health3"
+					if(0 to 20)
+						healths.icon_state = "health4"
+					else
+						healths.icon_state = "health5"
+			else
+				healths.icon_state = "health6"
+*/
