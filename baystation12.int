@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
-WINDOW: code\modules\cm_aliens\Xenomorph.dm;code\modules\cm_aliens\Evolution.dm;code\modules\cm_aliens\Castes\Larva.dm;code\modules\cm_aliens\Castes\Drone.dm;code\modules\cm_aliens\Life.dm;code\modules\cm_aliens\Castes\Queen.dm;code\_onclick\hud\alien_larva.dm;code\modules\cm_aliens\XenoHud.dm
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\_onclick code\_onclick\hud code\datums code\game code\game\gamemodes code\game\gamemodes\xeno code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\modules code\modules\cm_aliens code\modules\cm_aliens\Castes 
-FILE: code\modules\cm_aliens\Xenomorph.dm
 LAST_COMPILE_TIME: 1422416988
+DIR: code code\__HELPERS code\_onclick code\_onclick\hud code\datums code\game code\game\gamemodes code\game\gamemodes\xeno code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\modules maps 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 506.1249
+WINDOW: maps\COLONIAL MARINES.dmm
+FILE: maps\COLONIAL MARINES.dmm
 */
 // END_INTERNALS
