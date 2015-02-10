@@ -1,9 +1,8 @@
-///**************COLONIAL MARINES WEAPON/VENDING/FLASHLIGHT LAST EDIT: 21DEC2014 BY APOPHIS7755**************///
-
+///**************COLONIAL MARINES WEAPON/VENDING/FLASHLIGHT LAST EDIT: 06FEB2015 BY APOPHIS7755**************///
 
 
 ///***Bullets***///
-/obj/item/projectile/bullet/m4a3 //M4A3 Pistol
+/obj/item/projectile/bullet/m4a3 //Colt 45 Pistol
 	damage = 25
 
 /obj/item/projectile/bullet/m44m //44 Magnum Peacemaker
@@ -26,7 +25,7 @@
 	projectile_type = "/obj/item/projectile/bullet/m4a3"
 
 /obj/item/ammo_casing/m44m //44 Magnum Peacemaker
-	desc = "A 44 Magnul bullet casing."
+	desc = "A 44 Magnum bullet casing."
 	caliber = "38s"
 	projectile_type = "/obj/item/projectile/bullet/m44m"
 
@@ -50,7 +49,7 @@
 ///***Ammo Boxes***///
 
 /obj/item/ammo_magazine/m4a3 //45 Pistol
-	name = "Magazine (.45)"
+	name = "M4A3 Magazine (.45)"
 	desc = "A magazine with .45 ammo"
 	icon_state = ".45a"
 	ammo_type = "/obj/item/ammo_casing/m4a3"
@@ -66,7 +65,7 @@
 	return
 
 /obj/item/ammo_magazine/m44m // 44 Magnum Peacemaker
-	name = "Speed loader (44 Mag)"
+	name = "44 Magnum Speed Loader (.44)"
 	desc = "A 44 Magnum speed loader"
 	icon_state = "38"
 	ammo_type = "/obj/item/ammo_casing/m44m"
@@ -74,7 +73,7 @@
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/m39 // M39 SMG
-	name = "Magazine (9mm-S)"
+	name = "M39 SMG Mag (9mm)"
 	desc = "A 9mm special magazine"
 	icon_state = "9x19p-8"
 	ammo_type = "/obj/item/ammo_casing/m39"
@@ -85,7 +84,7 @@
 	max_ammo = 0
 
 /obj/item/ammo_magazine/m41 //M41 Assault Rifle
-	name = "magazine (10mm-S)"
+	name = "M41A Magazine (10mm)"
 	desc = "A 10mm special magazine"
 	icon_state = "m309a"
 	ammo_type = "/obj/item/ammo_casing/m41"
@@ -97,7 +96,7 @@
 
 
 /obj/item/weapon/storage/box/m37 //M37 Shotgun
-	name = "box of shotgun shells"
+	name = "M37 Shotgun shells (box)"
 	desc = "It has a picture of a M37 shotgun on the side."
 	icon_state = "shells"
 	w_class = 2 //Can fit in belts
@@ -140,7 +139,7 @@
 
 ///***SMGS***///
 
-/obj/item/weapon/gun/projectile/automatic/m39 // M39 SMG
+/obj/item/weapon/gun/projectile/automatic/Assault/m39 // M39 SMG
 	name = "\improper M39 SMG"
 	desc = " Armat Battlefield Systems M39 SMG. Uses 9mm rounds."
 	icon_state = "smg"
@@ -150,6 +149,7 @@
 	ammo_type = "/obj/item/ammo_casing/m39"
 	fire_delay = 0
 	force = 9.0
+	ejectshell = 0 //Caseless
 
 	isHandgun()
 		return 0
@@ -160,16 +160,17 @@
 /obj/item/weapon/gun/projectile/Assault/m41 //M41 Assault Rifle
 	name = "\improper M41A Rifle"
 	desc = "M41A Pulse Rifle. Uses 10mm special ammunition."
+	icon = 'icons/Marine/marine-weapons.dmi'
 	icon_state = "m41a0"
 	item_state = "m41a"
 	w_class = 3.0
 	max_shells = 30
 	caliber = "10mms"
-	icon = 'icons/Marine/marine-weapons.dmi'
 	ammo_type = "/obj/item/ammo_casing/m41"
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
 	load_method = 2
 	force = 10.0
+	ejectshell = 0 //Caseless
 	fire_delay = 4
 	slot_flags = SLOT_BACK
 
@@ -235,64 +236,8 @@
 		return (BRUTELOSS)
 
 
-///******MARINE VENDOR******///
 
-/obj/machinery/vending/marine
-	name = "ColMarTech"
-	desc = "A marine equipment vendor"
-	product_ads = "If it moves, it's hostile!;How many enemies have you killed today?;Shoot first, perform autopsy later!;Your ammo is right here.;Guns!;Die, scumbag!;Don't shoot me bro!;Shoot them, bro.;Why not have a donut?"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 25,
-
-					/obj/item/weapon/gun/projectile/pistol/m4a3 = 5,
-					/obj/item/weapon/gun/projectile/m44m = 5,
-					/obj/item/weapon/gun/projectile/automatic/m39 = 5,
-					/obj/item/weapon/gun/projectile/Assault/m41 = 5,
-					/obj/item/weapon/gun/projectile/shotgun/pump/m37 = 5,
-
-
-					/obj/item/ammo_magazine/m4a3 = 25,
-					/obj/item/ammo_magazine/m44m =25,
-					/obj/item/ammo_magazine/m39 = 25,
-					/obj/item/ammo_magazine/m41 = 25,
-					/obj/item/weapon/storage/box/m37 = 25,
-					/obj/item/ammo_magazine/a762 = 10,
-					/obj/item/ammo_magazine/a12mm = 25,
-
-
-					/obj/item/weapon/combat_knife = 5,
-					/obj/item/device/flashlight/flare = 10,
-					)
-	contraband = list(/*bj/item/weapon/storage/fancy/donut_box = 5,
-					/obj/item/ammo_magazine/a357 = 5,
-					/obj/item/ammo_magazine/a50 = 5,*/
-					)
-	premium = list(
-				/obj/item/ammo_magazine/a762 = 5,
-				)
-	prices = list(/*/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 1,
-					/obj/item/ammo_magazine/c38 = 6,
-					/obj/item/weapon/storage/box/beanbags = 7,
-					/obj/item/ammo_magazine/mc9mm = 20,
-					/obj/item/weapon/storage/box/shotguns = 42,
-					/obj/item/ammo_magazine/a12mm = 50,
-					/obj/item/ammo_magazine/c45 = 60,
-					/obj/item/ammo_magazine/c9mm = 75,
-					/obj/item/weapon/gun/projectile/detective = 60,
-					/obj/item/weapon/gun/projectile/silenced = 200,
-					/obj/item/weapon/gun/projectile/pistol = 240,
-					/obj/item/weapon/gun/projectile/automatic/mini_uzi = 320,
-					/obj/item/weapon/gun/projectile/automatic = 450,
-					/obj/item/weapon/gun/projectile/automatic/c20r = 500,
-					/obj/item/weapon/gun/projectile/shotgun/pump = 40,
-					/obj/item/weapon/gun/projectile/shotgun/pump/combat = 480,
-					/obj/item/weapon/storage/fancy/donut_box = 7,
-					/obj/item/ammo_magazine/a357 = 42,
-					/obj/item/ammo_magazine/a50 = 42,
-					/obj/item/ammo_magazine/a762 = 125,*/
-				)
-
-
-//EXTRA CODE TO MAKE THINGS WORK
+//EXTRA CODE TO MAKE THINGS WORK  Just... Leave it for now...
 
 /obj/item/weapon/gun/projectile/Assault
 	name = "\improper C-20r SMG"

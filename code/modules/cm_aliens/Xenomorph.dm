@@ -1,5 +1,4 @@
-//Xenomorph Super - Colonial Marines - Apophis775 - Last Edit: 24JAN2015
-//This could, could REALLY use a cleanup...
+//Xenomorph Super - Colonial Marines - Apophis775 - Last Edit: 8FEB2015
 
 /mob/living/carbon/Xenomorph
 	var/caste = ""
@@ -23,21 +22,20 @@
 	var/time_of_birth
 	var/language
 	var/mob/living/carbon/Xenomorph/new_xeno
+	var/jelly = 0 //variable to check if they ate delicious jelly or not
+	var/jellyGrow = 0 //how much the jelly has grown
+	var/jellyMax = 0 //max amount jelly will grow till evolution
 
 /mob/living/carbon/Xenomorph/New()
-
+	..()
 	time_of_birth = world.time
-
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
-	var/datum/reagents/R = new/datum/reagents(100)
-	reagents = R
-	R.my_atom = src
 
-//	src.frozen = 1 //Freeze the alien in place a moment, while it evolves
+/*	src.frozen = 1 //Freeze the alien in place a moment, while it evolves... WHY DOESN'T THIS WORK? 08FEB2015
 	spawn (25)
-//		src.frozen = 0
+		src.frozen = 0*/
 
 	name = "[initial(name)] ([rand(1, 1000)])"
 	real_name = name
@@ -45,10 +43,11 @@
 
 	if(language)
 		add_language(language)
-
+	var/datum/reagents/R = new/datum/reagents(100)
+	reagents = R
+	R.my_atom = src
 	gender = NEUTER
 
-	..()
 
 
 /mob/living/carbon/Xenomorph/u_equip(obj/item/W as obj)
@@ -95,3 +94,35 @@
 		adjustFireLoss(-1)
 		adjustToxLoss(-1)
 		adjustOxyLoss(-1)
+
+
+
+
+//Xenomorph Hud Health Adjuster Apophis 08FEB2015
+
+/*  Enable later, and it may need to be adjusted once the hud is operational
+/mob/living/carbon/Xenomorph
+
+	handle_regular_hud_updates()
+
+		..()
+		var/HP = (health/maxHealth)*100
+
+		if (healths)
+			if (stat != 2)
+				switch(HP)
+					if(80 to INFINITY)
+						healths.icon_state = "health0"
+					if(60 to 80)
+						healths.icon_state = "health1"
+					if(40 to 60)
+						healths.icon_state = "health2"
+					if(20 to 40)
+						healths.icon_state = "health3"
+					if(0 to 20)
+						healths.icon_state = "health4"
+					else
+						healths.icon_state = "health5"
+			else
+				healths.icon_state = "health6"
+*/

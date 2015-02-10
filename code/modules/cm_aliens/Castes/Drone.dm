@@ -18,80 +18,35 @@
 	storedplasma = 350
 	maxplasma = 750
 
+//new drone Code 06FEB2015
+
+mob/living/carbon/Xenomorph/Drone/New()
+	..()
+	jelly = 0
+	jellyMax = 1200
 
 
-/* OLD CM ALIEN CODE - FOR REFERENCE ONLY
+// either freeze is currently broken and needs to be investigated...
+	/
+	src.frozen = 1
+	spawn (25)
+		src.frozen = 0
+//	verbs.Add(/mob/living/carbon/Xenomorph/proc/resin,/mob/living/carbon/Xenomorph/proc/weak_acid) //This will be enabled later
+	growJelly()
 
-	heal_rate = 8
+
+
+
+
+
+
+/* OLD CM Drone Notes And Code - FOR REFERENCE ONLY
+
 	plasma_rate = 13
 	tacklemin = 2
 	tacklemax = 4 //old max 5
 	tackle_chance = 40 //Should not be above 100% old chance 50
-	var/hasJelly = 0
-	var/jellyProgress = 0
-	var/jellyProgressMax = 1200
 	psychiccost = 30
-	Stat()
-		..()
-		stat(null, "Jelly Progress: [jellyProgress]/[jellyProgressMax]")
-	proc/growJelly()
-		spawn while(1)
-			if(hasJelly)
-				if(jellyProgress < jellyProgressMax)
-					jellyProgress = min(jellyProgress + 1, jellyProgressMax)
-			sleep(10)
-	proc/canEvolve()
-		if(!hasJelly)
-			return 0
-		if(jellyProgress < jellyProgressMax)
-			return 0
-		return 1
-
-/mob/living/carbon/alien/humanoid/drone/New()
-	var/datum/reagents/R = new/datum/reagents(100)
-	src.frozen = 1
-	spawn (25)
-		src.frozen = 0
-	reagents = R
-	R.my_atom = src
-	if(src.name == "alien drone")
-		src.name = text("alien drone ([rand(1, 1000)])")
-	src.real_name = src.name
-	verbs.Add(/mob/living/carbon/alien/humanoid/proc/resin,/mob/living/carbon/alien/humanoid/proc/weak_acid)
-	growJelly()
-	verbs -= /atom/movable/verb/pull
-	/*var/matrix/M = matrix()
-	M.Scale(0.9,0.9)
-	src.transform = M
-	*/
-	..()
-//Drones use the same base as generic humanoids.
-//Drone verbs
-
-/mob/living/carbon/alien/humanoid/drone/verb/evolve() // -- TLE
-	set name = "Evolve (750)"
-	set desc = "Produce an interal egg sac capable of spawning children. Only one queen can exist at a time."
-	set category = "Alien"
-
-	if(powerc(500))
-		// Queen check
-		var/no_queen = 1
-		for(var/mob/living/carbon/alien/humanoid/queen/Q in living_mob_list)
-			if(!Q.key && Q.brain_op_stage != 4)
-				continue
-			no_queen = 0
-
-		if(no_queen)
-			adjustToxLoss(-500)
-			src << "\green You begin to evolve!"
-			for(var/mob/O in viewers(src, null))
-				O.show_message(text("\green <B>[src] begins to twist and contort!</B>"), 1)
-			var/mob/living/carbon/alien/humanoid/queen/new_xeno = new (loc)
-			mind.transfer_to(new_xeno)
-			del(src)
-		else
-			src << "<span class='notice'>We already have an alive queen.</span>"
-	return
 
 
 
@@ -137,28 +92,4 @@
 
 
 
-/mob/living/carbon/alien/humanoid/drone
-
-	handle_regular_hud_updates()
-
-		..() //-Yvarov
-		var/HP = (health/maxHealth)*100
-
-		if (healths)
-			if (stat != 2)
-				switch(HP)
-					if(80 to INFINITY)
-						healths.icon_state = "health0"
-					if(60 to 80)
-						healths.icon_state = "health1"
-					if(40 to 60)
-						healths.icon_state = "health2"
-					if(20 to 40)
-						healths.icon_state = "health3"
-					if(0 to 20)
-						healths.icon_state = "health4"
-					else
-						healths.icon_state = "health5"
-			else
-				healths.icon_state = "health6"
-				*/
+*/

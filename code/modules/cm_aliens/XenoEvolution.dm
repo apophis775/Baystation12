@@ -4,7 +4,7 @@
 //Larva Evolve
 /mob/living/carbon/Xenomorph/Larva/verb/Evolve()
 	set name = "Evolve"
-	set desc = "Evolve into a beautiful alien"
+	set desc = "Evolve into a cute wittle alium"
 	set category = "Abilities"
 
 	if(stat !=CONSCIOUS)
@@ -23,7 +23,7 @@
 
 	switch(newcaste)
 		if("Runner")
-			//	new_xeno = new /mob/living/carbon/alien/humanoid/runner(loc)
+			new_xeno = new /mob/living/carbon/Xenomorph/Runner(loc)
 		if("Sentinel")
 			//	new_xeno = new /mob/living/carbon/alien/humanoid/sentinel(loc)
 		if("Drone")
@@ -37,7 +37,7 @@
 //Drone Evolve to Queen
 /mob/living/carbon/Xenomorph/Drone/verb/Evolve()
 	set name = "Evolve (500)"
-	set desc = "Evolve into a beautiful Queen, requires 500 Plasma."
+	set desc = "Evolve into a beautiful Alien Queen, requires 500 Plasma."
 	set category = "Abilities"
 
 	if(stat !=CONSCIOUS)
