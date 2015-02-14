@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 LAST_COMPILE_TIME: 1423464545
-DIR: code code\__HELPERS code\_onclick code\_onclick\hud code\datums code\game code\game\gamemodes code\game\gamemodes\xeno code\game\machinery code\game\machinery\bots code\game\objects code\game\objects\items code\game\objects\items\devices code\modules maps 
+DIR: code\_onclick\hud code\game\gamemodes\xeno code\game\machinery\bots maps 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 506.1249
-WINDOW: maps\COLONIAL MARINES.dmm
+WINDOW: maps\COLONIAL MARINES.dmm;maps\Planet.dmm
 FILE: maps\COLONIAL MARINES.dmm
 */
 // END_INTERNALS
